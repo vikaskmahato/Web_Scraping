@@ -9,7 +9,7 @@ db_url = db_url.format(
     USER = "root",
     PWD = "PasswordForMySQL",
     HOST = "localhost:3306",
-    DBNAME = "test"
+    DBNAME = "laptops"
 )
 # Create the DB engine instance. We'll use
 # this engine to connect to the database

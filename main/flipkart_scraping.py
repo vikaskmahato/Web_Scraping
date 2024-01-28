@@ -1,6 +1,7 @@
-from bs4 import BeautifulSoup
 import requests
 import pandas as pd
+from bs4 import BeautifulSoup
+from mysql_connector import engine
 
 
 # find all occurrences of a tag or set of tags that match the specified criteria
@@ -53,7 +54,7 @@ def product_rating(content_div):
 
 headers = ({'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', 'Accept-Language': 'en-US, en;q=0.5'}) 
 
-for i in range(1,2):
+for i in range(1,24):
     url = "https://www.flipkart.com" + "/search?q=laptop&amp;otracker=search&amp;otracker1=search&amp;marketplace=FLIPKART&amp;as-show=on&amp;as=off&amp;page=" + str(i)
 
     page = requests.get(url= url, headers= headers)
@@ -73,6 +74,16 @@ for i in range(1,2):
     products_dict = {'product_name': names, 'product_price': prices, 'product_description': description, 'product_rating': rating}
     df = pd.DataFrame(products_dict)
     print(df.head(10))
+
+    with engine.begin() as conn:
+    # Invoke DataFrame method to_sql() to
+    # create the table 'largest_cities' and
+    # insert all the DataFrame rows into it
+        df.to_sql(
+            name='flipkart_data', # database table
+            con=conn, # database connection
+            index=False # Don't save index
+        )
     # df.to_csv(r"C:\Users\vikas\Documents\mydata.csv")
     
 

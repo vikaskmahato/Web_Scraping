@@ -1,5 +1,5 @@
 import pandas as pd
-from mysql_connector import engine
+from main.mysql_connector import engine
 
 # Five most populated cities in the world
 cities = ['Tokyo', 'Delhi', 'Shanghai',
