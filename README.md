@@ -1,0 +1,1 @@
+This Python script is part of a laptop recommendation project that utilizes web scraping techniques to extract data from Flipkart. The extracted data is then loaded into a MySQL table, forming the basis for intelligent laptop recommendations.
