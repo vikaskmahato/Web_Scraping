@@ -77,7 +77,7 @@ for i in range(1,24):
 
     with engine.begin() as conn:
     # Invoke DataFrame method to_sql() to
-    # create the table 'largest_cities' and
+    # create the table and
     # insert all the DataFrame rows into it
         df.to_sql(
             name='flipkart_data', # database table
@@ -85,6 +85,9 @@ for i in range(1,24):
             index=False # Don't save index
         )
     # df.to_csv(r"C:\Users\vikas\Documents\mydata.csv")
+        
+# Reading offline csv files
+files = {"CPU": r"C:\Users\vikas\Dow\CPU_UserBenchmarks.csv"}
     
 
 
