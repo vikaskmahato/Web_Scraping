@@ -82,12 +82,35 @@ for i in range(1,24):
         df.to_sql(
             name='flipkart_data', # database table
             con=conn, # database connection
-            index=False # Don't save index
+            index=False, # Don't save index
+            if_exists= 'replace'
         )
-    # df.to_csv(r"C:\Users\vikas\Documents\mydata.csv")
+#     # df.to_csv(r"C:\Users\vikas\Documents\mydata.csv")
         
 # Reading offline csv files
-files = {"CPU": r"C:\Users\vikas\Dow\CPU_UserBenchmarks.csv"}
+files = {"CPU": ".\\csv_files\\CPU_UserBenchmarks.csv",
+         "GPU": ".\\csv_files\\GPU_UserBenchmarks.csv",
+         "HDD": ".\\csv_files\\HDD_UserBenchmarks.csv",
+         "RAM": ".\\csv_files\\RAM_UserBenchmarks.csv",
+         "SSD": ".\\csv_files\\SSD_UserBenchmarks.csv",
+         "USB": ".\\csv_files\\USB_UserBenchmarks.csv"}
+
+
+with engine.begin() as conn:
+    # Invoke DataFrame method to_sql() to
+    # create the table and
+    # insert all the DataFrame rows into it
+    for key in files:
+        # path = val.strip('"')
+        df = pd.read_csv(files[key])
+        df.to_sql(
+            name=f'{key.lower()}_data', # database table
+            con=conn, # database connection
+            index=False, # Don't save index
+            if_exists= 'replace'
+        )
+
+print("Function Executed Successfully")
     
 
 
